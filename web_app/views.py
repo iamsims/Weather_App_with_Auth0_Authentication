@@ -52,9 +52,11 @@ def logout(request):
 
 
 def get_weather_data():
-    url = 'https://samples.openweathermap.org/data/2.5/group?id={}&units=metric&appid=439d4b804bc8187953eb36d2a8c26a02'.format(list_country_codes)
+    list_country_codes_str= ",".join(list_country_codes)
+    url = 'https://api.openweathermap.org/data/2.5/group?id={}&units=metric&appid=7d3a9f6a41a7d0e119afb759febfaea7'.format(list_country_codes_str)
     response = requests.get(url).json() #request the API data and convert the JSON to Python data types
     weather_data =[]
+    # print(response)
     for city_response in response["list"]:
         weather = {
             "name":city_response["name"],
@@ -64,7 +66,6 @@ def get_weather_data():
         }
         weather_data.append(weather)
 
-    print(weather_data)
 
     return weather_data
 
@@ -73,7 +74,7 @@ def index(request):
     weather_data = cache.get('weathers')
     if weather_data is None:
         weather_data = get_weather_data()
-        cache.set('weathers', weather_data, 60*5)
+        cache.set('weathers', weather_data, 2)
 
     context = {
     "weather_data": weather_data,
