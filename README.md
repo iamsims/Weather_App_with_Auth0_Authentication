@@ -16,7 +16,7 @@ Weather App is implemented using [openweathermap.org](openweather.org) to retrie
  **Setup environment file**
  
        touch .env
-       #Add AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET, AUTH0_DOMAIN=dev-vrqqhtcn.us.auth0.com
+       #Add AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET, AUTH0_DOMAIN
        
        
  **Run the webserver**
