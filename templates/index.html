@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title" >
+                    Today's weather
+                </h1>
+                {% if session %}
+                <p>Welcome {{session.userinfo.name}}!</p>
+                <p><a href="{% url 'logout' %}">Logout</a></p>
+
+                
+                {% else %}
+                <h1>Welcome Guest</h1>
+                <p><a href="{% url 'login' %}">Login</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% if session %}
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for weather in weather_data %}
+                    <div class="box">
+                        <p>
+                            <!-- hello -->
+                            <span class="title">{{weather.name}}</span>
+                            <br> {{weather.id}}
+                            <br>
+                            <span class="subtitle">{{weather.temp}}</span>
+                            <br> {{weather.description}}
+
+                        </p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <footer class="footer">
+    </footer>
+
+</body>
+</html>
