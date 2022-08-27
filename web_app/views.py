@@ -71,10 +71,14 @@ def get_weather_data():
 
 
 def index(request):
-    weather_data = cache.get('weathers')
-    if weather_data is None:
-        weather_data = get_weather_data()
-        cache.set('weathers', weather_data, 2)
+    if (request.session.get("user")):
+        weather_data = cache.get('weathers')
+        if weather_data is None:
+            weather_data = get_weather_data()
+            cache.set('weathers', weather_data, 2)
+
+    else:
+        weather_data = []
 
     context = {
     "weather_data": weather_data,
